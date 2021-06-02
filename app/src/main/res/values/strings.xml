@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">GestionRegistrant</string>
+    <string name="noteList">note List</string>
+    <string name="lastname">lastName</string>
+    <string name="email">email</string>
+    <string name="add_user">Add User</string>
+    <string name="firstname">firstName</string>
+    <string name="phone">phone</string>
+    <string name="todo">TODO</string>
+</resources>

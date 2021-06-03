@@ -14,13 +14,21 @@ public class User implements Parcelable {
     private String telNum;
 
 
-    User(long id, String firstName, String lastName, String email, String telNum) {
+    public User(long id, String firstName, String lastName, String email, String telNum) {
         this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
         this.telNum = telNum;
     }
+    public User(String firstName, String lastName, String email, String telNum) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.email = email;
+        this.telNum = telNum;
+    }
+
+
 
     private User(Parcel in) {
         id = in.readLong();
@@ -84,13 +92,7 @@ public class User implements Parcelable {
 
     @Override
     public String toString() {
-        return "User{" +
-                "id=" + id +
-                ", firstName='" + firstName + '\'' +
-                ", lastName='" + lastName + '\'' +
-                ", email='" + email + '\'' +
-                ", telNum='" + telNum + '\'' +
-                '}';
+        return firstName + " " + lastName + " \n" + email;
     }
 
     public static List<User> getUsersList() {

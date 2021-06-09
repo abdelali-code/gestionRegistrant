@@ -81,11 +81,12 @@ public class UsersData {
 
     @RequiresApi(api = Build.VERSION_CODES.N)
     public static void updateUser(UserOpenHelper userOpenHelper, User user, User oldValue) {
+        System.out.println("inside update function");
         SQLiteDatabase db = userOpenHelper.getWritableDatabase();
         // Define 'where' part of query.
         String selection = UserDatabase.UserEntry._ID + " = ?";
         // Specify arguments in placeholder order.
-        String[] selectionArgs = { Long.toString(user.getId()) };
+        String[] selectionArgs = { Long.toString(oldValue.getId()) };
         /*
         public int update (String table,
                 ContentValues values,
@@ -94,20 +95,18 @@ public class UsersData {
          */
         // Issue SQL statement.
         ContentValues holder = new ContentValues();
-        holder.put(UserDatabase.UserEntry._ID, user.getId());
+        System.out.println("the firs " + user.getFirstName() + "the last " + user.getLastName() + " email " + user.getEmail());
         holder.put(UserDatabase.UserEntry.COLUMN_FIRSTNAME, user.getFirstName());
         holder.put(UserDatabase.UserEntry.COLUMN_LASTNAME, user.getLastName());
         holder.put(UserDatabase.UserEntry.COLUMN_EMAIL, user.getEmail());
         holder.put(UserDatabase.UserEntry.COLUMN_NUMTEL, user.getTelNum());
         int updatedUser = db.update(UserDatabase.UserEntry.TABLE_NAME, holder, selection, selectionArgs);
         if (updatedUser > 0) {
+            System.out.println("updated");
             for(User usr : listUser) {
-                if(usr.getId() == oldValue.getId()) {
-                    System.out.println("the old value id is " + oldValue.getId() + "the current user is " + usr.getLastName());
-                    user.setTelNum(oldValue.getTelNum());
-                    user.setFirstName(oldValue.getFirstName());
-                    user.setLastName(oldValue.getLastName());
-                    user.setEmail(oldValue.getEmail());
+                if (usr.getId() == user.getId()) {
+                    usr.setEmail(user.getEmail());
+                    usr.setFirstName(user.getFirstName());
                 }
             }
         }
